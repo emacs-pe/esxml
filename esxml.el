@@ -1,4 +1,4 @@
-;;; esxml.el --- Library for working with xml via esxml and sxml
+;;; esxml.el --- Library for working with xml via esxml and sxml -*- lexical-binding: t -*-
 ;; Copyright (C) 2012
 
 ;; Author: Evan Izaksonas-Smith <izak0002 at umn dot edu>

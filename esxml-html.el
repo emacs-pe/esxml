@@ -1,4 +1,4 @@
-;;; esxml-html.el --- HTML convenience functions for esxml
+;;; esxml-html.el --- HTML convenience functions for esxml -*- lexical-binding: t -*-
 ;; Copyright (C) 2012
 
 ;; Author: Evan Izaksonas-Smith <izak0002 at umn dot edu>
