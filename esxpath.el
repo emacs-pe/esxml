@@ -49,7 +49,23 @@
         (car test-sheet))
       (list test-sheet))))
 
+(defun esxpath--attrp (attr)
+  "Returns t if attr is a an esxml attribute.
+An esxml attribute is a cons of the form (symbol . string)"
+ (and (consp attr)
+       (symbolp (car attr))
+       (stringp (cdr attr))))
 
+(defun esxpath--attrsp (attrs)
+  "Returns t if attrs is a list of esxml attributes.
+
+See: `esxpath--attrp'"
+  (and (listp attrs)
+       (cl-every (lambda (attr)
+                   (and (consp attr)
+                        (symbolp (car attr))
+                        (stringp (cdr attr))))
+                 attrs)))
 
 ;; (defun esxpath-child-p (child-node parent-node)
 ;;   (find child-node (esxpath-get-children parent-node)))
@@ -88,12 +104,12 @@
                      (esxpath-select-root ',(first pathspec) esxml))
         ;; (`((:has-child ,pathspec) ,form) (esxpath-select-with-child ))
         (`((,(and tag (pred symbolp))
-            ,(and attrs (pred attrsp))
+            ,(and attrs (pred esxpath--attrsp))
             ,pathspec)
            ,form)
          (:recur pathspec `(esxpath-select-from-children ',tag ',attrs ,form)))
         (`((,(and tag (pred symbolp))
-            ,(and attrs (pred attrsp)))
+            ,(and attrs (pred esxpath--attrsp)))
            ,form)
          `(esxpath-select-from-children ',tag ',attrs ,form))
         (`(,pathspec ,form) `((pathspec ,pathspec) (form ,form))))))

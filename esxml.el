@@ -58,13 +58,6 @@ but may eroneously delete desirable white space."
       `(,tag ,attrs
              ,@(mapcar 'esxml-trim-ws body)))))
 
-(defun attrp (attr)
-  "Returns t if attr is a an esxml attribute.
-An esxml attribute is a cons of the form (symbol . string)"
- (and (consp attr)
-       (symbolp (car attr))
-       (stringp (cdr attr))))
-
 (defun esxml--convert-pair (attr)
   "Converts from cons cell to attribute pair.  Not intended for
 general use."
@@ -73,17 +66,6 @@ general use."
     (concat (symbol-name car)
             "="
             (prin1-to-string (xml-escape-string cdr)))))
-
-(defun attrsp (attrs)
-    "Returns t if attrs is a list of esxml attributes.
-
-See: `attrp'"
-  (and (listp attrs)
-       (cl-every (lambda (attr)
-                   (and (consp attr)
-                        (symbolp (car attr))
-                        (stringp (cdr attr))))
-                 attrs)))
 
 (defun esxml-validate-form (esxml)
   "A fast esxml validator.  Will error on invalid subparts making
