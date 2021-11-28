@@ -55,12 +55,12 @@
    (should (listp (esxml-form-fields fs)))
    (should (equal '(username key)
                   (kvalist->keys (esxml-form-fields fs))))
-   (should (listp (aget (esxml-form-fields fs) 'username)))))
+   (should (listp (cdr (assoc 'username (esxml-form-fields fs)))))))
 
 (ert-deftest esxml--field-check ()
   (esxml-form-field-set--test-defaults
    (let* ((fields (esxml-form-fields fs))
-          (username-field (aget fields 'username)))
+          (username-field (cdr (assoc 'username fields))))
      (should-not (esxml--field-check username-field "NicFerrier"))
      (should
       (eq :regex
