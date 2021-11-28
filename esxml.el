@@ -7,6 +7,7 @@
 ;; Created: 15th August 2012
 ;; Version: 0.3.7
 ;; Keywords: tools, lisp, comm
+;; Package-Requires: ((emacs "24.4"))
 ;; Description: A library for easily generating XML/XHTML in elisp
 ;;
 ;; This program is free software; you can redistribute it and/or modify
@@ -49,20 +50,10 @@
 (require 'xml)
 (require 'pcase)
 
-(defun string-trim-whitespace (string)
-  "A simple function, strips the whitespace from beginning and
-end of the string.  Leaves all other whitespace untouched."
-  (replace-regexp-in-string
-   (rx string-start (* whitespace)
-       (group (+? anything))
-       (* whitespace) string-end)
-   "\\1"
-   string))
-
 (defun esxml-trim-ws (esxml)
   "This may cause problems, is intended for parsing xml into sxml
 but may eroneously delete desirable white space."
-  (if (stringp esxml) (string-trim-whitespace esxml)
+  (if (stringp esxml) (string-trim esxml)
     (pcase-let ((`(,tag ,attrs . ,body) esxml))
       `(,tag ,attrs
              ,@(mapcar 'esxml-trim-ws body)))))

@@ -5,7 +5,7 @@
 ;; Maintainer: Evan Izaksonas-Smith
 ;; Created: 15th August 2012
 ;; Version: 0.3.0
-;; Package-Requires: ((kv "0.0.5"))
+;; Package-Requires: ((emacs "24.4") (kv "0.0.5"))
 ;; Keywords: tools, lisp, comm
 ;; Description: esxml convenience functions for certain HTML elements
 ;;
